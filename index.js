@@ -1,8 +1,10 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
+const cors = require('cors');
 const express = require('express');
 const app = express();
 
+app.use(cors());
 // Configuración del transporte SMTP utilizando Mailtrap
 const transporter = nodemailer.createTransport({
   host: 'sandbox.smtp.mailtrap.io',
@@ -44,7 +46,7 @@ app.get('/enviar-correo', (req, res) => {
       }
     });
   } else {
-    res.send('missingparams');
+    res.send({ msg: 'missingparams' });
   }
 });
 
