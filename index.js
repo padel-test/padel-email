@@ -29,20 +29,20 @@ app.get('/enviar-correo', (req, res) => {
   ) {
     // Configuración del correo electrónico a enviar
     const mailOptions = {
-      from: 'francisco@gmail.com',
-      to: 'pvucontroller@gmail.com',
-      subject: 'Prueba de correo electrónico',
-      text: 'Hola, esto es un mensaje de prueba enviado desde Nodemailer y Mailtrap.',
+      from: params.from,
+      to: params.to,
+      subject: params.subject,
+      text: params.text,
     };
 
     // Envío del correo electrónico
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log('Error al enviar el correo:', error);
-        res.status(500).send('Error al enviar el correo electrónico');
+        res.status(500).send({ msg: 'Error al enviar el correo electrónico' });
       } else {
         console.log('Correo enviado correctamente:', info.response);
-        res.send('Correo electrónico enviado correctamente');
+        res.send({ msg: 'Correo electrónico enviado correctamente' });
       }
     });
   } else {
