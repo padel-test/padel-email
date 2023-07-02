@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 
 // Ruta para enviar el correo electrónico
 app.get('/enviar-correo', (req, res) => {
-  const params = req.params;
+  const params = req.query;
   if (
     params.from &&
     params.to &&
@@ -43,6 +43,8 @@ app.get('/enviar-correo', (req, res) => {
         res.send('Correo electrónico enviado correctamente');
       }
     });
+  } else {
+    res.send('missingparams');
   }
 });
 
